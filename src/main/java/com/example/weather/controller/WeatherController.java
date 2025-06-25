@@ -37,6 +37,6 @@ public class WeatherController {
     @PostMapping("/alerts")
     public String sendAlert(@RequestParam String city, @RequestBody String msg) {
         notificationService.sendNotification(city, msg);
-        return "Notification sent for " + city;
+        return NotificationService.getMessage();
     }
 }

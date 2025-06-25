@@ -6,14 +6,14 @@ import org.springframework.stereotype.Service;
 @Service
 @Scope("prototype")
 public class NotificationService {
-    private String message;
+    private static String message;
 
     public void sendNotification(String city, String msg) {
         this.message = "Alert for " + city + ": " + msg;
         System.out.println(message); // Simulate sending notification
     }
 
-    public String getMessage() {
+    public static String getMessage() {
         return message;
     }
 }
