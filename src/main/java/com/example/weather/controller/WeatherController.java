@@ -6,6 +6,7 @@ import com.example.weather.service.NotificationService;
 import com.example.weather.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31,12 +32,12 @@ public class WeatherController {
 
     @GetMapping("/weather/{city}")
     public Weather getWeather(@PathVariable String city) {
-        return weatherService.getWeather(city);
+        return ResponseEntity.ok(weatherService.getWeather(city)).getBody();
     }
 
     @PostMapping("/alerts")
-    public String sendAlert(@RequestParam String city, @RequestBody String msg) {
+    public ResponseEntity<String> sendAlert(@RequestParam String city, @RequestBody String msg) {
         notificationService.sendNotification(city, msg);
-        return NotificationService.getMessage();
+        return ResponseEntity.ok(NotificationService.getMessage());
     }
 }
